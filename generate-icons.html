@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>生成图标</title>
+  <style>
+    body { font-family: system-ui; display: flex; flex-direction: column; align-items: center; padding: 40px; gap: 20px; }
+    button { padding: 12px 24px; font-size: 16px; cursor: pointer; }
+    canvas { display: none; }
+  </style>
+</head>
+<body>
+  <h2>PWA 图标生成器</h2>
+  <p>点击按钮生成并下载 192x192 和 512x512 的图标</p>
+  <p>将下载的文件放到 public 目录下即可</p>
+  <button onclick="generate()">生成图标</button>
+  <canvas id="c"></canvas>
+
+  <script>
+    function drawIcon(size) {
+      const c = document.getElementById('c');
+      c.width = size;
+      c.height = size;
+      const ctx = c.getContext('2d');
+
+      // Background
+      ctx.fillStyle = '#10B981';
+      ctx.beginPath();
+      ctx.roundRect(0, 0, size, size, size * 0.22);
+      ctx.fill();
+
+      // White ¥ symbol
+      ctx.fillStyle = '#fff';
+      ctx.font = `bold ${size * 0.45}px system-ui`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('¥', size / 2, size / 2);
+    }
+
+    function download(size) {
+      drawIcon(size);
+      const c = document.getElementById('c');
+      c.toBlob(blob => {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'icon-' + size + '.png';
+        a.click();
+      });
+    }
+
+    function generate() {
+      download(192);
+      setTimeout(() => download(512), 300);
+    }
+  </script>
+</body>
+</html>

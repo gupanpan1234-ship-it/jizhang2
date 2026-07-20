@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>扫码打开记账App</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; min-height: 100vh; margin: 0;
+      background: #f3f4f6; padding: 20px;
+    }
+    h2 { font-size: 20px; margin-bottom: 8px; color: #111827; }
+    p { font-size: 14px; color: #6b7280; margin-bottom: 24px; text-align: center; }
+    #qrcode { background: white; padding: 20px; border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+    .url {
+      margin-top: 16px; padding: 10px 20px; background: #10B981;
+      color: white; border-radius: 8px; font-size: 16px; font-weight: 600;
+      word-break: break-all; text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h2>家庭记账 App</h2>
+  <p>浏览器打开，首次会提示"不安全"→ 点"高级"→"继续访问"</p>
+  <div id="qrcode"></div>
+  <div class="url">https://10.144.49.254:5174/</div>
+  <script>
+    new QRCode(document.getElementById('qrcode'), {
+      text: 'https://10.144.49.254:5174/',
+      width: 280, height: 280,
+      colorDark: '#111827', colorLight: '#ffffff',
+    });
+  </script>
+</body>
+</html>
